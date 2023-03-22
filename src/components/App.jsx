@@ -5,59 +5,68 @@ import { ContactList } from './ContactList';
 import { Box } from './Box';
 import { Filter } from './Filter';
 
-const initialContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-];
+// const initialContacts = [
+//   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+//   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+//   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+//   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+// ];
 
 export function App() {
-  const [contacts, setContacts] = useState(
-    JSON.parse(window.localStorage.getItem('contacts')) ?? initialContacts
-  );
-  const [filter, setFilter] = useState('');
+  // const [contacts, setContacts] = useState(
+  //   JSON.parse(window.localStorage.getItem('contacts')) ?? initialContacts
+  // );
+  // const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  const addContact = ({ name, number }) => {
-    const newContact = {
-      id: nanoid(),
-      name: name,
-      number: number,
-    };
-    const match = contacts.find(contact => contact.name === newContact.name);
+  // const addContact = ({ name, number }) => {
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name: name,
+  //     number: number,
+  //   };
+  //   const match = contacts.find(contact => contact.name === newContact.name);
 
-    if (match) {
-      return alert(`${newContact.name} is already in contacts.`);
-    }
+  //   if (match) {
+  //     return alert(`${newContact.name} is already in contacts.`);
+  //   }
 
-    setContacts(prevContacts => [newContact, ...prevContacts]);
-  };
+  //   setContacts(prevContacts => [newContact, ...prevContacts]);
+  // };
 
-  const deleteContact = contactId => {
-    setContacts(prevContacts =>
-      prevContacts.filter(contact => contact.id !== contactId)
-    );
-  };
+  // const deleteContact = contactId => {
+  //   setContacts(prevContacts =>
+  //     prevContacts.filter(contact => contact.id !== contactId)
+  //   );
+  // };
 
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const visibleContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(filter.toLowerCase())
+  // );
 
-  const changeFilter = e => {
-    setFilter(e.target.value);
-  };
+  // const changeFilter = e => {
+  //   setFilter(e.target.value);
+  // };
 
+  // return (
+  //   <Box p="4">
+  //     <h1>Phonebook</h1>
+  //     <PhonebookForm onSubmit={addContact} />
+  //     <h1>Contacts</h1>
+  //     <Filter value={filter} onChange={changeFilter} />
+  //     <ContactList contacts={visibleContacts} onDeleteContact={deleteContact} />
+  //   </Box>
+  // );
   return (
     <Box p="4">
       <h1>Phonebook</h1>
-      <PhonebookForm onSubmit={addContact} />
+      <PhonebookForm />
       <h1>Contacts</h1>
-      <Filter value={filter} onChange={changeFilter} />
-      <ContactList contacts={visibleContacts} onDeleteContact={deleteContact} />
+      <Filter />
+      <ContactList />
     </Box>
   );
 }
