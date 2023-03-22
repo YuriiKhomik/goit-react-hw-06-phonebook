@@ -1,17 +1,23 @@
-import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts, deleteContact } from 'redux/contactsSlice';
 import { getFilter } from 'redux/filterSlice';
 import PropTypes from 'prop-types';
 import { List, Contact } from './styled';
 import { Box } from 'components/Box';
 
 export const ContactList = () => {
+  const dispatch = useDispatch();
+
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
+
+  // const deleteContact = contactId => {
+
+  //   };
 
   return (
     <List>
@@ -22,7 +28,9 @@ export const ContactList = () => {
               <Contact>
                 {name}: {number}
               </Contact>
-              <button type="button">Delete</button>
+              <button type="button" onClick={() => dispatch(deleteContact(id))}>
+                Delete
+              </button>
             </Box>
           </li>
         );
